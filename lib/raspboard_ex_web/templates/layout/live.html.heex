@@ -1,0 +1,19 @@
+<main class="h-screen background p-5">
+  <p class="alert alert-info" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+
+  <p class="alert alert-danger" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+
+  <%= @inner_content %>
+</main>
+
+<style>
+
+.background {
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #E0F2FE 0%, #7DD3FC 100%);
+}
+</style>

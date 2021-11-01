@@ -1,0 +1,10 @@
+<div class="p-5 bg-white bg-opacity-20 rounded-lg">
+    <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 
+        justify-items-center
+        gap-5">
+        <%= for light <- @lights do %>
+            <.light_switch id={light.id} on={light.state.on} />
+        <% end %>
+    
+    </section>
+</div>
