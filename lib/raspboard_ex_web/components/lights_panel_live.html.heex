@@ -3,7 +3,7 @@
         justify-items-center
         gap-5">
         <%= for light <- @lights do %>
-            <.light_switch id={light.id} on={light.state.on} />
+            <.light_switch id={light.id} on={light.state.on} name={light.name} />
         <% end %>
     
     </section>

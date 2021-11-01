@@ -25,7 +25,7 @@ defmodule RaspboardWeb.LightComponents do
                 text-center text-gray-900 text-xl font-bold text-opacity-10"}
               style='transform: scale({$nameScale})'>
 
-              <%= "#{@id}: #{@on}" %>
+              <%= "#{@name}" %>
           </div>
       </div>
       <div
