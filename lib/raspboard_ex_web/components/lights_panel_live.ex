@@ -15,7 +15,7 @@ defmodule RaspboardExWeb.LightsPanelLive do
   def handle_event("toggleLight", %{"lightid" => id}, socket) do
     IO.puts "toggle light: #{id}"
 
-    current_light_state = socket.assigns.lights
+    current_light_state = socket.assigns.lights.reachable
     |> light_by_id(id)
     |> light_state()
 
@@ -25,7 +25,14 @@ defmodule RaspboardExWeb.LightsPanelLive do
   end
 
   defp get_lights_status do
-    LightsService.get_lights_status(@lights_service)
+    {reachable, unreachable} =
+      LightsService.get_lights_status(@lights_service)
+      |> Enum.split_with(fn l -> l.state.reachable end)
+
+    %{
+      reachable: reachable,
+      unreachable: unreachable
+    }
   end
 
 end

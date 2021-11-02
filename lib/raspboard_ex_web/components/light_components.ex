@@ -3,8 +3,8 @@ defmodule RaspboardWeb.LightComponents do
 
   def light_switch(assigns) do
     ~H"""
-    <div
-      id={"wrapper-#{@id}"}
+    <button
+      id={"light-switch-#{@id}"}
       class={"
         w-32
         border border-gray-600 border-opacity-20 rounded-lg
@@ -17,13 +17,12 @@ defmodule RaspboardWeb.LightComponents do
       <div
           class={"h-24 w-full
             transition-all duration-500
-            #{light_switch_classes(assigns)}
+            #{classes(assigns).switch}
             pt-2"}
             >
           <div
               class={"w-full
-                text-center text-gray-900 text-xl font-bold text-opacity-10"}
-              style='transform: scale({$nameScale})'>
+                text-center #{classes(assigns).name} text-xl font-bold text-opacity-20"}>
 
               <%= "#{@name}" %>
           </div>
@@ -32,12 +31,12 @@ defmodule RaspboardWeb.LightComponents do
           class={"w-full h-5
             cursor-pointer
             border-t border-gray-400 border-opacity-25
-            #{light_source_classes(assigns)}"}
+            #{classes(assigns).source}"}
           style='background: linear-gradient(90deg, {$lightSourceBgEdges} 0%, {$lightSourceBgMidPoint} 50%, {$lightSourceBgEdges} 100%)'
           class:light-source-on='{on}'>
       </div>
 
-      </div>
+      </button>
     """
   end
 
@@ -55,6 +54,22 @@ defmodule RaspboardWeb.LightComponents do
 
   defp light_switch_classes(%{on: false}) do
     "bg-gray-600"
+  end
+
+  defp classes(%{on: true}) do
+    %{
+      source: "bg-yellow-200",
+      switch: "bg-gray-100",
+      name: "text-gray-800"
+    }
+  end
+
+  defp classes(%{on: false}) do
+    %{
+      source: "bg-gray-700",
+      switch: "bg-gray-600",
+      name: "text-white"
+    }
   end
 
 end
