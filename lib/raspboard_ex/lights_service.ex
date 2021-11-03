@@ -1,6 +1,9 @@
 defmodule Raspboard.LightsService do
   use GenServer
 
+  alias Phoenix.PubSub
+  @pubsub Raspboard.PubSub
+
   # CLIENT
 
   def start_link(options) do
@@ -34,6 +37,7 @@ defmodule Raspboard.LightsService do
     case Hue.Client.set_light(light_id, desired_state) do
       {:ok} ->
         # TODO: pubsub: broadcast light state updated
+        PubSub.broadcast!(@pubsub, "lights:hue", :lights_state_update)
         {:noreply, retrieve_lights_status()}
       _ ->
         {:noreply, retrieve_lights_status()}

@@ -11,7 +11,7 @@ defmodule RaspboardEx.Application do
       # Start the Telemetry supervisor
       RaspboardExWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: RaspboardEx.PubSub},
+      {Phoenix.PubSub, name: Raspboard.PubSub},
       # Start the Endpoint (http/https)
       RaspboardExWeb.Endpoint,
       # Start a worker by calling: RaspboardEx.Worker.start_link(arg)

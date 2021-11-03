@@ -11,7 +11,7 @@ import Config
 config :raspboard_ex, RaspboardExWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: RaspboardExWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: RaspboardEx.PubSub,
+  pubsub_server: Raspboard.PubSub,
   live_view: [signing_salt: "Jcu0M9CY"]
 
 # Configures the mailer
