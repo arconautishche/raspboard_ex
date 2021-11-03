@@ -8,3 +8,4 @@ erl_crash.dump
 *.beam
 /config/*.secret.exs
 priv/static/assets/app.css
+priv/static/assets/app.js
