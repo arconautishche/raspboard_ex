@@ -1,6 +1,8 @@
 defmodule RaspboardWeb.LightComponents do
   use Phoenix.Component
 
+  import RaspboardWeb.Components.Expander
+
   def light_switch(assigns) do
     ~H"""
     <div
@@ -39,6 +41,41 @@ defmodule RaspboardWeb.LightComponents do
       </div>
     """
   end
+
+  def unreachable_lights(assigns) do
+    ~H"""
+    <.expander>
+      <:header>
+        <span>🔌</span>
+        <span class="ml-3">
+            <%= "#{@lights |> Enum.count} unreachable lights" %>
+        </span>
+      </:header>
+
+      <:body>
+        <div class="mx-5 pb-5
+                    flex flex-row flex-wrap
+                    gap-5 items-start
+                    ">
+          <%= if @lights |> Enum.any? do %>
+            <%= for light <- @lights do %>
+
+              <div>
+                  <.light_switch
+                      id={light.id}
+                      on={false}
+                      disabled={true}
+                      name={light.name}  />
+              </div>
+
+            <% end %>
+          <% end %>
+        </div>
+      </:body>
+    </.expander>
+    """
+  end
+
 
   defp classes(%{on: true}) do
     %{
