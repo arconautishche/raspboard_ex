@@ -5,8 +5,7 @@
             <.light_switch 
                 id={light.id} 
                 on={light.state.on} 
-                name={light.name}
-                phx-click="toggleLight" phx-value-lightid={light.id} />
+                name={light.name} />
         <% end %>
     
     </div>
@@ -25,7 +24,11 @@
                 <%= for light <- @lights.unreachable do %>
                
                     <div>
-                        <.light_switch id={light.id} on={false} name={light.name}  />
+                        <.light_switch 
+                            id={light.id} 
+                            on={false} 
+                            disabled={true}
+                            name={light.name}  />
                     </div>
                     
                 <% end %>
