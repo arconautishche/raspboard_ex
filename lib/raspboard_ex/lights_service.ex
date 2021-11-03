@@ -36,7 +36,6 @@ defmodule Raspboard.LightsService do
   def handle_cast({:toggle_light, light_id, desired_state}, _lights_state) do
     case Hue.Client.set_light(light_id, desired_state) do
       {:ok} ->
-        # TODO: pubsub: broadcast light state updated
         PubSub.broadcast!(@pubsub, "lights:hue", :lights_state_update)
         {:noreply, retrieve_lights_status()}
       _ ->
