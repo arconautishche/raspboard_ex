@@ -34,8 +34,7 @@ defmodule RaspboardWeb.LightComponents do
               cursor-pointer
               border-t border-gray-400 border-opacity-25
               #{classes(assigns).source}
-              transition-all duration-200"}
-            style='background: linear-gradient(90deg, {$lightSourceBgEdges} 0%, {$lightSourceBgMidPoint} 50%, {$lightSourceBgEdges} 100%)'>
+              transition-all duration-200"}>
         </div>
 
       </div>
