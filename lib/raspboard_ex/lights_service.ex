@@ -3,6 +3,7 @@ defmodule Raspboard.LightsService do
 
   alias Phoenix.PubSub
   @pubsub Raspboard.PubSub
+  @topic "lights:hue"
 
   # CLIENT
 
@@ -36,7 +37,7 @@ defmodule Raspboard.LightsService do
   def handle_cast({:toggle_light, light_id, desired_state}, _lights_state) do
     case Hue.Client.set_light(light_id, desired_state) do
       {:ok} ->
-        PubSub.broadcast!(@pubsub, "lights:hue", :lights_state_update)
+        PubSub.broadcast!(@pubsub, @topic, :lights_state_update)
         {:noreply, retrieve_lights_status()}
       _ ->
         {:noreply, retrieve_lights_status()}

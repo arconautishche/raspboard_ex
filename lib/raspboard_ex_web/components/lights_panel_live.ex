@@ -9,10 +9,11 @@ defmodule RaspboardExWeb.LightsPanelLive do
 
   @lights_service Raspboard.LightsService
   @pubsub Raspboard.PubSub
+  @topic "lights:hue"
 
   def mount(_, _, socket) do
     if connected?(socket) do
-      PubSub.subscribe(@pubsub, "lights:hue")
+      PubSub.subscribe(@pubsub, @topic)
     end
 
     {:ok, assign(socket, lights: get_lights_status())}
@@ -25,7 +26,7 @@ defmodule RaspboardExWeb.LightsPanelLive do
 
     LightsService.toggle_light(@lights_service, id, !current_light_state)
 
-    {:noreply, assign(socket, lights: get_lights_status())}
+    {:noreply, socket}
   end
 
   def handle_info(:lights_state_update, socket) do
