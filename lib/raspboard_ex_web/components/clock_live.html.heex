@@ -1,0 +1,9 @@
+<div class="flex flex-row flex-nowrap items-baseline justify-center
+            text-gray-700 text-opacity-75 text-2xl">
+
+    <span class="clock-digit"><%= @hour %></span>
+    <span class={"transition-all duration-100 #{colon_classes(@colon_state)}"}>:</span>
+    <span class="clock-digit"><%= @min %></span>
+    <span class={"transition-all duration-100 #{colon_classes(@colon_state)}"}>:</span>
+    <span class="clock-digit"><%= @sec %></span>
+</div>
