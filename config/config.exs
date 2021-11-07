@@ -8,9 +8,9 @@
 import Config
 
 # Configures the endpoint
-config :raspboard_ex, RaspboardExWeb.Endpoint,
+config :raspboard, RaspboardWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: RaspboardExWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [view: RaspboardWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Raspboard.PubSub,
   live_view: [signing_salt: "Jcu0M9CY"]
 
@@ -21,7 +21,7 @@ config :raspboard_ex, RaspboardExWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :raspboard_ex, RaspboardEx.Mailer, adapter: Swoosh.Adapters.Local
+config :raspboard, Raspboard.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

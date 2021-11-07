@@ -1,4 +1,4 @@
-# RaspboardEx
+# Raspboard
 
 To start your Phoenix server:
 

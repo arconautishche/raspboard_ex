@@ -1,0 +1,9 @@
+<div class="flex flex-row flex-wrap items-start gap-5">
+    <section class="px-5 py-3 bg-white bg-opacity-20 rounded-lg flex-grow sm:flex-none">
+        <%= live_render @socket, Components.ClockLive, id: "clock" %>
+    </section>
+
+    <section class="p-5 py-3 bg-white bg-opacity-20 rounded-lg flex-grow">
+        <%= live_render @socket, Components.LightsPanelLive, id: "lights_panel" %>
+    </section>
+</div>

@@ -1,9 +1,9 @@
-defmodule RaspboardEx.MixProject do
+defmodule Raspboard.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :raspboard_ex,
+      app: :raspboard,
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule RaspboardEx.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {RaspboardEx.Application, []},
+      mod: {Raspboard.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

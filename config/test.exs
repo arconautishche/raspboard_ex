@@ -2,13 +2,13 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :raspboard_ex, RaspboardExWeb.Endpoint,
+config :raspboard, RaspboardWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "MIPCsG9QbNnkGDRGxoPmPlVlj128KkV7CXH33/9kHuOv26NN+/ttsqG7IXmj4P2R",
   server: false
 
 # In test we don't send emails.
-config :raspboard_ex, RaspboardEx.Mailer,
+config :raspboard, Raspboard.Mailer,
   adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test

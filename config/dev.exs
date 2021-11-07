@@ -6,7 +6,7 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :raspboard_ex, RaspboardExWeb.Endpoint,
+config :raspboard, RaspboardWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {0, 0, 0, 0}, port: 4000],
@@ -52,13 +52,13 @@ config :raspboard_ex, RaspboardExWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :raspboard_ex, RaspboardExWeb.Endpoint,
+config :raspboard, RaspboardWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/raspboard_ex_web/.*(ex)$",
-      ~r"lib/raspboard_ex_web/.*(eex)$"
+      ~r"lib/raspboard_web/.*(ex)$",
+      ~r"lib/raspboard_web/.*(eex)$"
     ]
   ]
 
