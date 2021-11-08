@@ -47,10 +47,31 @@ defmodule Raspboard.LightsService do
   # PRIVATE
 
   defp retrieve_lights_status do
-    case Hue.Client.get_lights() do
-      {:ok, lights} -> lights
+    with {:ok, groups} <- Hue.Client.get_groups,
+         {:ok, lights} <- Hue.Client.get_lights
+    do
+      {reachable, unreachable} =
+        lights
+        |> Enum.split_with(fn l -> l.state.reachable end)
+
+      groups
+      |> Enum.map(fn group ->
+        %{
+          group: group,
+          reachable_lights: reachable |> lights_in_group(group),
+          unreachable_lights: unreachable |> lights_in_group(group)
+          }
+        end)
+
+    else
       _ -> []
+
     end
+  end
+
+  defp lights_in_group(lights, %Hue.Group{lights: lights_in_group}) do
+    lights
+    |> Enum.filter(fn l -> l.id in lights_in_group end)
   end
 
 end
