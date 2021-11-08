@@ -1,11 +1,24 @@
-<div class="flex flex-row flex-wrap gap-5 justify-items-center">
-    <%= for light <- @lights.reachable do %>
-        <.light_switch 
-            id={light.id} 
-            on={light.state.on} 
-            name={light.name} />
-    <% end %>
+<%= for group <- @groups_with_lights do %>
+        
+    <div class="my-5">
+        
+        <div class="text-gray-900 text-opacity-25 mb-1">
+            <%= group.group.name %>
+        </div>
 
-</div>
+        <div class="flex flex-row flex-wrap gap-5 justify-items-center">
 
-<.unreachable_lights lights={@lights.unreachable} />
+            <%= for light <- group.reachable_lights do %>
+                <.light_switch
+                    id={light.id}
+                    on={light.state.on}
+                    name={light.name} />
+            <% end %>
+        </div>
+    </div>
+<% end %>
+    
+
+
+
+<.unreachable_lights lights={@unreachable} />
