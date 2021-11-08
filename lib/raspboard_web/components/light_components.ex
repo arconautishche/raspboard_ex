@@ -23,7 +23,7 @@ defmodule RaspboardWeb.LightComponents do
               pt-2"}
               >
             <div
-                class={"w-full
+                class={"w-full p-1
                   text-center #{classes(assigns).name} text-xl font-bold text-opacity-20"}>
 
                 <%= "#{@name}" %>
