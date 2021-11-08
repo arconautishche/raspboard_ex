@@ -22,7 +22,8 @@ defmodule RaspboardWeb.Components.LightsPanelLive do
 
   @impl true
   def handle_event("toggleLight", %{"lightid" => id}, socket) do
-    current_light_state = socket.assigns.lights.reachable
+    current_light_state = socket.assigns.groups_with_lights
+    |> Enum.flat_map(&(&1.reachable_lights))
     |> light_by_id(id)
     |> light_state()
 
@@ -42,9 +43,14 @@ defmodule RaspboardWeb.Components.LightsPanelLive do
     all_light_groups = LightsService.get_lights_status(@lights_service)
     assign(
       socket,
-      groups_with_lights: all_light_groups |> Enum.filter(fn gr -> !Enum.empty?(gr.reachable_lights) end),
-      unreachable: all_light_groups |> Enum.flat_map(fn gr -> gr.unreachable_lights end)
+      groups_with_lights: all_light_groups |> only_with_reachable_lights,
+      unreachable: all_light_groups |> Enum.flat_map(&(&1.unreachable_lights))
       )
+  end
+
+  defp only_with_reachable_lights(light_groups) do
+    light_groups
+    |> Enum.filter(&(!Enum.empty?(&1.reachable_lights)))
   end
 
 
