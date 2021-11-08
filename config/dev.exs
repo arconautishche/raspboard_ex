@@ -57,8 +57,8 @@ config :raspboard, RaspboardWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/raspboard_web/.*(ex)$",
-      ~r"lib/raspboard_web/.*(eex)$"
+      ~r"lib/.*(ex)$",
+      ~r"lib/.*(eex)$"
     ]
   ]
 
