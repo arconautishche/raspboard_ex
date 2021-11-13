@@ -24,6 +24,7 @@ defmodule Raspboard.LightsService do
 
   @impl true
   def init(init_arg) do
+    Process.send_after(self(), :refresh, 5_000)
     {:ok, init_arg}
   end
 
@@ -37,11 +38,23 @@ defmodule Raspboard.LightsService do
   def handle_cast({:toggle_light, light_id, desired_state}, _lights_state) do
     case Hue.Client.set_light(light_id, desired_state) do
       {:ok} ->
-        PubSub.broadcast!(@pubsub, @topic, :lights_state_update)
+        broadcast(:lights_state_update)
         {:noreply, retrieve_lights_status()}
       _ ->
         {:noreply, retrieve_lights_status()}
     end
+  end
+
+  @impl true
+  def handle_info(:refresh, state) do
+    Process.send_after(self(), :refresh, 5_000)
+    updated_light_status = retrieve_lights_status()
+
+    if state != updated_light_status do
+      broadcast(:lights_state_update)
+    end
+
+    {:noreply, updated_light_status}
   end
 
   # PRIVATE
@@ -72,6 +85,10 @@ defmodule Raspboard.LightsService do
   defp lights_in_group(lights, %Hue.Group{lights: lights_in_group}) do
     lights
     |> Enum.filter(fn l -> l.id in lights_in_group end)
+  end
+
+  defp broadcast(event) do
+    PubSub.broadcast!(@pubsub, @topic, event)
   end
 
 end
